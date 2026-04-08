@@ -1,2 +1,5 @@
+# Estas versiones estan a la fecha de 08/04/2026
 pandas>=3.0.2
 numpy>=2.4.4
+matplotlib>=3.10.8
+seaborn>=0.13.2
