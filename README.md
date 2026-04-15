@@ -7,17 +7,17 @@ Este repositorio contiene un preprocesamiento de ciencia de datos inicial. Esta 
 ```text
 ciencia_de_datos/
 ├── data/
-│   ├── raw/                  # Dataset sin limpiar
-│   └── processed/            # Dataset procesado y listo para el análisis
-├── docs/                     # Reporte técnico
-├── notebooks/                # Análisis exploratorio de los datos hecho en Jupyter notebooks
-├── src/                      # Código fuente para transformadores personalizados y auditoría
-│   ├── __init__.py
-│   ├── audit.py              # 
-│   └── transformers.py       # 
-├── main.py                   # Script Main
-├── requirements.txt          # Librerías de python necesarias
-└── README.md                 # Instrucciones del proyecto
+│   ├── raw/                        # Dataset sin limpiar
+│   └── processed/                  # Dataset procesado y listo para el análisis
+├── docs/                           # Reporte técnico
+├── notebooks/                      # Análisis exploratorio de los datos hecho en Jupyter notebooks
+├── src/                            # Código fuente para transformadores personalizados y auditoría
+│   ├── ingenieria_variable.py      # Funcion indicador de ubicacion
+│   ├── procesamiento_textp.py      # Procesamiento de texto y consolidacion de ubicaciones
+│   └── validacion_geografica.py    # Configuración del geolocalizador
+├── main.py                         # Script Main
+├── requirements.txt                # Librerías de python necesarias
+└── README.md                       # Instrucciones del proyecto
 ```
 
 ## Instrucciones de configuración
