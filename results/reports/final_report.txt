@@ -1,0 +1,14 @@
+
+REPORTE FINAL
+
+Mejor modelo:
+Random Forest
+
+Accuracy: 0.9844
+Precision: 0.9844
+Recall: 0.9844
+F1-Score: 0.9844
+
+Conclusión:
+El modelo con mejor desempeño fue
+Random Forest.
