@@ -7,18 +7,19 @@ evaluation, hyperparameter optimization, and result saving.
 import traceback
 from pathlib import Path
 
+from numpy import rint
 import pandas as pd
 from sklearn.model_selection import train_test_split
 
 # LIMPIEZA Y PREPROCESAMIENTO
 
 from src.ingenieria_variable import generar_indicadores_perfil
-from src.validacion_geografica import procesar_geografia_completa
-from src.procesamiento_texto import consolidar_ubicaciones
+#from src.validacion_geografica import procesar_geografia_completa
+#from src.procesamiento_texto import consolidar_ubicaciones
 
 # PREPROCESSING
 
-from src.data_preprocessing import preprocess_data
+from src.data_preprocessing import preprocess_data, split_data
 
 # MODELOS
 
@@ -51,14 +52,13 @@ def main():
 
         print("\n FASE 1: Cargando dataset")
 
-        raw_dir = Path("data/raw")
-        csv_files = list(raw_dir.glob("*.csv"))
+        BASE_DIR = Path(__file__).resolve().parent
 
-        if not csv_files:
-            print(f" Error: No se encontró ningún CSV en {raw_dir}")
+        csv_file = BASE_DIR / "data" / "processed" / "twitter_profiles_cleaned.csv"
+
+        if not csv_file.exists():
+            print(f" Error: No se encontró el archivo {csv_file}")
             return
-
-        csv_file = csv_files[0]
 
         print(f" Dataset encontrado: {csv_file.name}")
 
@@ -78,39 +78,35 @@ def main():
 
         # 3. VALIDACIÓN GEOGRÁFICA
 
-        print("\n FASE 3: Validación geográfica")
+        #print("\n FASE 3: Validación geográfica")
 
-        df = procesar_geografia_completa(
-            df,
-            columna_origen='location'
-        )
+        #df = procesar_geografia_completa(
+        #    df,
+        #    columna_origen='location'
+        #)
 
-        print(" Validación geográfica completada")
+        #print(" Validación geográfica completada")
 
         # 4. CONSOLIDACIÓN DE TEXTO
 
-        print("\n FASE 4: Consolidación de ubicaciones")
+        #print("\n FASE 4: Consolidación de ubicaciones")
 
-        for ciudad in ['new york', 'australia', 'london']:
+        #for ciudad in ['new york', 'australia', 'london']:
 
-            df = consolidar_ubicaciones(
-                df,
-                'location_clean',
-                ciudad,
-                ciudad
-            )
+         #   df = consolidar_ubicaciones(
+        #        df,
+         #       'location_clean',
+        #        ciudad,
+        #        ciudad
+        #    )
 
-        print(" Consolidación completada")
+        #print(" Consolidación completada")
 
         # 5. LIMPIEZA FINAL
 
         print("\n FASE 5: Limpieza final")
 
-        df = df.drop(columns=['location'], errors='ignore')
-
-        df = df.rename(
-            columns={'location_clean': 'location'}
-        )
+        print("⏩ Validación geográfica deshabilitada temporalmente")
 
         print(" Limpieza final completada")
 
@@ -118,20 +114,15 @@ def main():
 
         print("\n FASE 6: Preprocesamiento para ML")
 
-        X, y = preprocess_data(df)
+        df = preprocess_data(df)
 
         print(" Preprocesamiento completado")
 
         # 7. TRAIN / TEST SPLIT
 
-        print("\n FASE 7: Separación train/test")
+        print("\n📂 FASE 7: Separación train/test")
 
-        X_train, X_test, y_train, y_test = train_test_split(
-            X,
-            y,
-            test_size=0.2,
-            random_state=42
-        )
+        X_train, X_test, y_train, y_test = split_data(df)
 
         print(" Datos separados correctamente")
 
